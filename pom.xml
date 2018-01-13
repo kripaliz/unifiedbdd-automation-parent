@@ -13,6 +13,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<selenium.version>3.8.1</selenium.version>
 	</properties>
 
 	<dependencies>
