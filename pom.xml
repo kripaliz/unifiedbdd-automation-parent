@@ -44,6 +44,10 @@
 					<argLine>
 						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
 					</argLine>
+					<parallel>classes</parallel>
+					<includes>
+						<include>**/Parallel*IT.java</include>
+					</includes>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -54,5 +58,23 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.github.temyers</groupId>
+					<artifactId>cucumber-jvm-parallel-plugin</artifactId>
+					<version>4.2.0</version>
+					<executions>
+						<execution>
+							<id>generateRunners</id>
+							<phase>generate-test-sources</phase>
+							<goals>
+								<goal>generateRunners</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
