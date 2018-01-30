@@ -42,7 +42,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>
-						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
+						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 					</argLine>
 					<parallel>classes</parallel>
 					<includes>
@@ -71,6 +71,15 @@
 							<goals>
 								<goal>generateRunners</goal>
 							</goals>
+							<configuration>
+								<parallelScheme>SCENARIO</parallelScheme>
+								<plugins>
+									<plugin>
+										<name>io.qameta.allure.cucumberjvm.AllureCucumberJvm</name>
+										<noOutput>true</noOutput>
+									</plugin>
+								</plugins>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
