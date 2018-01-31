@@ -75,7 +75,7 @@
 								<parallelScheme>SCENARIO</parallelScheme>
 								<plugins>
 									<plugin>
-										<name>io.qameta.allure.cucumberjvm.AllureCucumberJvm</name>
+										<name>io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm</name>
 										<noOutput>true</noOutput>
 									</plugin>
 								</plugins>
