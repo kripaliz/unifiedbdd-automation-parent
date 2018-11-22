@@ -1,5 +1,8 @@
 # UnifiedBDD Automation Parent
 
+## BDD automation testing Made simple
+[![Build Status](https://travis-ci.org/kripaliz/unifiedbdd-automation-parent.svg?branch=master)](https://travis-ci.org/kripaliz/unifiedbdd-automation-parent)
+
 solution implemented in Java to support all plugins for automation execution using UnifiedBDD Automation Framework
 
 * cucumber-jvm-parallel-plugin - generates test classes by splitting features into scenarios for parallel execution
