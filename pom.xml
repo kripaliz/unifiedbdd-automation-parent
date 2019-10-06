@@ -4,24 +4,25 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.9.RELEASE</version>
+		<version>2.1.8.RELEASE</version>
 	</parent>
 	<groupId>com.github.kripaliz</groupId>
 	<artifactId>unifiedbdd-automation-parent</artifactId>
-	<version>0.0.4</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
+		<allure-maven.version>2.10.0</allure-maven.version>
 		<java.version>1.8</java.version>
-		<selenium.version>3.8.1</selenium.version>
-		<maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+		<selenium.version>3.141.59</selenium.version>
+		<threadCount>1</threadCount>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.github.kripaliz</groupId>
 			<artifactId>unifiedbdd-automation-framework</artifactId>
-			<version>0.0.4</version>
+			<version>0.1.0</version>
 		</dependency>
 	</dependencies>
 
@@ -31,7 +32,7 @@
 			<plugin>
 				<groupId>io.qameta.allure</groupId>
 				<artifactId>allure-maven</artifactId>
-				<version>2.10.0</version>
+				<version>${allure-maven.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -45,10 +46,12 @@
 					<argLine>
 						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 					</argLine>
-					<parallel>classes</parallel>
-					<includes>
-						<include>**/Parallel*IT.java</include>
-					</includes>
+					<properties>
+						<property>
+							<name>dataproviderthreadcount</name>
+							<value>${threadCount}</value>
+						</property>
+					</properties>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -56,41 +59,14 @@
 						<artifactId>aspectjweaver</artifactId>
 						<version>${aspectj.version}</version>
 					</dependency>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>${maven-surefire-plugin.version}</version>
-					</dependency>
 				</dependencies>
 			</plugin>
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>${allure-maven.version}</version>
+			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>com.github.temyers</groupId>
-					<artifactId>cucumber-jvm-parallel-plugin</artifactId>
-					<version>4.2.0</version>
-					<executions>
-						<execution>
-							<id>generateRunners</id>
-							<phase>generate-test-sources</phase>
-							<goals>
-								<goal>generateRunners</goal>
-							</goals>
-							<configuration>
-								<parallelScheme>SCENARIO</parallelScheme>
-								<plugins>
-									<plugin>
-										<name>io.qameta.allure.cucumber2jvm.AllureCucumber2Jvm</name>
-										<noOutput>true</noOutput>
-									</plugin>
-								</plugins>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 	
 	<licenses>
