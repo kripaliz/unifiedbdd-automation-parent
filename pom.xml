@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>com.github.kripaliz</groupId>
 			<artifactId>unifiedbdd-automation-framework</artifactId>
-			<version>0.1.0</version>
+			<version>0.1.1</version>
 		</dependency>
 	</dependencies>
 
