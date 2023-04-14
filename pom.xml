@@ -4,25 +4,43 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.8.RELEASE</version>
+		<version>2.7.10</version>
 	</parent>
 	<groupId>com.github.kripaliz</groupId>
 	<artifactId>unifiedbdd-automation-parent</artifactId>
-	<version>0.1.5</version>
+	<version>0.2.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<allure-maven.version>2.10.0</allure-maven.version>
-		<java.version>1.8</java.version>
+		<allure-maven.version>2.12.0</allure-maven.version>
+		<java.version>11</java.version>
+		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
+		<okhttp.version>3.12.0</okhttp.version>
 		<selenium.version>3.141.59</selenium.version>
-		<threadCount>1</threadCount>
+		<cucumber.execution.parallel.enabled>false</cucumber.execution.parallel.enabled>
+		<cucumber.execution.parallel.config.strategy>FIXED</cucumber.execution.parallel.config.strategy>
+		<cucumber.execution.parallel.config.fixed.parallelism>4</cucumber.execution.parallel.config.fixed.parallelism>
+		<cucumber.filter.tags></cucumber.filter.tags>
+		<cucumber.glue></cucumber.glue>
+		<cucumber.plugin></cucumber.plugin>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>25.0-jre</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.github.kripaliz</groupId>
 			<artifactId>unifiedbdd-automation-framework</artifactId>
-			<version>0.1.5</version>
+			<version>0.2.0</version>
 		</dependency>
 	</dependencies>
 
@@ -47,11 +65,15 @@
 						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 					</argLine>
 					<properties>
-						<property>
-							<name>dataproviderthreadcount</name>
-							<value>${threadCount}</value>
-						</property>
-					</properties>
+						<configurationParameters>
+							cucumber.execution.parallel.config.fixed.parallelism=${cucumber.execution.parallel.config.fixed.parallelism}
+							cucumber.execution.parallel.config.strategy=${cucumber.execution.parallel.config.strategy}
+							cucumber.execution.parallel.enabled=${cucumber.execution.parallel.enabled}
+							cucumber.filter.tags=${cucumber.filter.tags}
+							cucumber.glue=com.github.kripaliz.automation.cucumber.glue,${cucumber.glue}
+							cucumber.plugin=com.github.kripaliz.automation.cucumber.plugin.TestReportListener,io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm,${cucumber.plugin}
+						</configurationParameters>
+				</properties>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -68,7 +90,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
