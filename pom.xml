@@ -8,14 +8,14 @@
 	</parent>
 	<groupId>com.github.kripaliz</groupId>
 	<artifactId>unifiedbdd-automation-parent</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<allure-maven.version>2.12.0</allure-maven.version>
 		<java.version>11</java.version>
-		<maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-		<maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
+		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+		<maven-failsafe-plugin.version>3.0.0</maven-failsafe-plugin.version>
 		<okhttp.version>3.12.0</okhttp.version>
 		<selenium.version>3.141.59</selenium.version>
 		<cucumber.execution.parallel.enabled>false</cucumber.execution.parallel.enabled>
@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>com.github.kripaliz</groupId>
 			<artifactId>unifiedbdd-automation-framework</artifactId>
-			<version>0.2.0</version>
+			<version>0.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -66,12 +66,14 @@
 					</argLine>
 					<properties>
 						<configurationParameters>
+							cucumber.execution.parallel.config.fixed.max-pool-size=${cucumber.execution.parallel.config.fixed.parallelism}
 							cucumber.execution.parallel.config.fixed.parallelism=${cucumber.execution.parallel.config.fixed.parallelism}
 							cucumber.execution.parallel.config.strategy=${cucumber.execution.parallel.config.strategy}
 							cucumber.execution.parallel.enabled=${cucumber.execution.parallel.enabled}
 							cucumber.filter.tags=${cucumber.filter.tags}
 							cucumber.glue=com.github.kripaliz.automation.cucumber.glue,${cucumber.glue}
-							cucumber.plugin=com.github.kripaliz.automation.cucumber.plugin.TestReportListener,io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm,${cucumber.plugin}
+							cucumber.junit-platform.naming-strategy=long
+							cucumber.plugin=com.github.kripaliz.automation.cucumber.plugin.TestReportListener,io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm,${cucumber.plugin}
 						</configurationParameters>
 				</properties>
 				</configuration>
